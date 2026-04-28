@@ -20,14 +20,14 @@ def health():
 
 @app.route("/items", methods=["POST"])
 def save_item():
-    # TODO: save item to database
-    pass
+    data = request.get_json()
+    return jsonify({"message": "Item saved", "data": data}), 201
 
 
 @app.route("/items/<item_id>", methods=["DELETE"])
 def delete_item(item_id):
     # TODO: delete item from database
-    pass
+    return jsonify({"message": f"Item {item_id} deleted"}), 200
 
 
 @app.route("/items", methods=["GET"])
@@ -36,6 +36,11 @@ def list_items():
     cur.execute("SELECT * FROM items")
     rows = cur.fetchall()
     return jsonify(rows), 200
+
+# Under normal port 80: just display hello world
+@app.route("/")
+def hello():
+    return "Hello, World!", 200
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80, debug=True)
