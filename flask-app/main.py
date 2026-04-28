@@ -1,4 +1,14 @@
+import os
+import psycopg2
 from flask import Flask, request, jsonify
+
+conn = psycopg2.connect(
+    host=os.getenv("DB_HOST"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    dbname=os.getenv("DB_NAME"),
+    port=5432
+)
 
 app = Flask(__name__)
 
@@ -22,9 +32,10 @@ def delete_item(item_id):
 
 @app.route("/items", methods=["GET"])
 def list_items():
-    # TODO: fetch all items from database
-    pass
-
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM items")
+    rows = cur.fetchall()
+    return jsonify(rows), 200
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=80, debug=True)
