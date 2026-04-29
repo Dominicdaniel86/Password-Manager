@@ -111,10 +111,12 @@ def delete_item(item_id):
 @require_auth
 def list_items():
     user_id = g.user["sub"]
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM items WHERE user_id = %s", (user_id,))
-    rows = cur.fetchall()
-    return jsonify(rows), 200
+    print(f"User {user_id} is listing items")
+    return jsonify({"message": f"Items for user {user_id} would be listed here"}), 200
+    # cur = conn.cursor()
+    # cur.execute("SELECT * FROM items WHERE user_id = %s", (user_id,))
+    # rows = cur.fetchall()
+    # return jsonify(rows), 200
 
 # Under normal port 80: just display hello world
 @app.route("/")
