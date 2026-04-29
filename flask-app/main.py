@@ -13,24 +13,24 @@ conn = psycopg2.connect(
 app = Flask(__name__)
 
 
-@app.route("/health")
+@app.route("/api/health")
 def health():
     return jsonify({"status": "ok"}), 200
 
 
-@app.route("/items", methods=["POST"])
+@app.route("/api/items", methods=["POST"])
 def save_item():
     data = request.get_json()
     return jsonify({"message": "Item saved", "data": data}), 201
 
 
-@app.route("/items/<item_id>", methods=["DELETE"])
+@app.route("/api/items/<item_id>", methods=["DELETE"])
 def delete_item(item_id):
     # TODO: delete item from database
     return jsonify({"message": f"Item {item_id} deleted"}), 200
 
 
-@app.route("/items", methods=["GET"])
+@app.route("/api/items", methods=["GET"])
 def list_items():
     cur = conn.cursor()
     cur.execute("SELECT * FROM items")
@@ -38,8 +38,11 @@ def list_items():
     return jsonify(rows), 200
 
 # Under normal port 80: just display hello world
-@app.route("/")
+@app.route("/api/")
 def hello():
+    return "Hello, World!", 200
+@app.route("/")
+def hello_root():
     return "Hello, World!", 200
 
 if __name__ == "__main__":
