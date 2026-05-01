@@ -94,6 +94,7 @@ def health():
 @require_auth
 def save_item():
     user_id = g.user["sub"]
+    ensure_user_exists(user_id)  # ← add this
     data = request.get_json()
     cur = conn.cursor()
     cur.execute(
@@ -109,6 +110,7 @@ def save_item():
 @require_auth
 def delete_item(item_id):
     user_id = g.user["sub"]
+    ensure_user_exists(user_id)  # ← add this
     cur = conn.cursor()
     cur.execute(
         "DELETE FROM items WHERE id = %s AND user_id = %s",
@@ -123,6 +125,7 @@ def delete_item(item_id):
 @require_auth
 def list_items():
     user_id = g.user["sub"]
+    ensure_user_exists(user_id)  # ← add this
     print(f"User {user_id} is listing items")
     cur = conn.cursor()
     cur.execute("SELECT id, title, username, password, url, notes, created_at FROM items WHERE user_id = %s", (user_id,))
@@ -134,6 +137,16 @@ def list_items():
     ]
     return jsonify(items), 200
 
+
+# ── DB Helper ─────────────────────────────────────────────────
+def ensure_user_exists(user_id: str):
+    cur = conn.cursor()
+    cur.execute(
+        "INSERT INTO users (id) VALUES (%s) ON CONFLICT (id) DO NOTHING",
+        (user_id,)
+    )
+    conn.commit()
+    cur.close()
 
 # Under normal port 80: just display hello world
 @app.route("/")
