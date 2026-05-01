@@ -95,7 +95,13 @@ def health():
 def save_item():
     user_id = g.user["sub"]
     data = request.get_json()
-    # TODO: INSERT INTO items (user_id, ...) VALUES (%s, ...)
+    cur = conn.cursor()
+    cur.execute(
+        "INSERT INTO items (user_id, title, username, password, url, notes) VALUES (%s, %s, %s, %s, %s, %s)",
+        (user_id, data["title"], data.get("username"), data["password"], data.get("url"), data.get("notes"))
+    )
+    conn.commit()
+    cur.close()
     return jsonify({"message": "Item saved", "data": data, "user": user_id}), 201
 
 
@@ -103,7 +109,13 @@ def save_item():
 @require_auth
 def delete_item(item_id):
     user_id = g.user["sub"]
-    # TODO: DELETE FROM items WHERE id = %s AND user_id = %s  ← user_id wichtig!
+    cur = conn.cursor()
+    cur.execute(
+        "DELETE FROM items WHERE id = %s AND user_id = %s",
+        (item_id, user_id)
+    )
+    conn.commit()
+    cur.close()
     return jsonify({"message": f"Item {item_id} deleted", "user": user_id}), 200
 
 
@@ -112,11 +124,16 @@ def delete_item(item_id):
 def list_items():
     user_id = g.user["sub"]
     print(f"User {user_id} is listing items")
-    return jsonify({"message": f"Items for user {user_id} would be listed here"}), 200
-    # cur = conn.cursor()
-    # cur.execute("SELECT * FROM items WHERE user_id = %s", (user_id,))
-    # rows = cur.fetchall()
-    # return jsonify(rows), 200
+    cur = conn.cursor()
+    cur.execute("SELECT id, title, username, password, url, notes, created_at FROM items WHERE user_id = %s", (user_id,))
+    rows = cur.fetchall()
+    cur.close()
+    items = [
+        {"id": r[0], "title": r[1], "username": r[2], "password": r[3], "url": r[4], "notes": r[5], "created_at": r[6]}
+        for r in rows
+    ]
+    return jsonify(items), 200
+
 
 # Under normal port 80: just display hello world
 @app.route("/")
