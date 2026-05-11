@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Password Manager</title>
+  <link rel="stylesheet" href="homepage-style.css" />
+  <script src="homepage-code.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <div>
+        <p class="greeting">Good morning</p>
+        <h1 class="title">My vault</h1>
+      </div>
+      <div class="avatar">JD</div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat-card">
+        <div class="number">42</div>
+        <div class="label">Passwords</div>
+      </div>
+      <div class="stat-card">
+        <div class="number warn">3</div>
+        <div class="label">Weak</div>
+      </div>
+      <div class="stat-card">
+        <div class="number success">39</div>
+        <div class="label">Strong</div>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="search-wrap">
+      <svg class="search-icon" width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="10" y1="10" x2="14" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <input type="text" placeholder="Search passwords..." />
+    </div>
+
+    <!-- Passwords -->
+    <p class="section-label">Your Passwords</p>
+
+    <div class="entry-list">
+
+      <!-- Facebook -->
+      <div class="entry">
+        <div class="entry-icon" style="background:#1877F2;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </div>
+        <div class="entry-info">
+          <div class="name">Facebook</div>
+          <div class="user">j.doe@email.com</div>
+        </div>
+        <svg class="chevron" width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <button class="delete-btn" onclick="handleDelete(${item.id})">✕</button>
+      </div>
+
+      <!-- X / Twitter -->
+      <div class="entry">
+        <div class="entry-icon" style="background:#000;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </div>
+        <div class="entry-info">
+          <div class="name">X / Twitter</div>
+          <div class="user">@johndoe</div>
+        </div>
+        <svg class="chevron" width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- Amazon -->
+      <div class="entry">
+        <div class="entry-icon" style="background:#FF9900;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+            <path d="M13.958 10.09c0 1.232.029 2.256-.591 3.351-.502.891-1.301 1.438-2.186 1.438-1.214 0-1.922-.924-1.922-2.292 0-2.692 2.415-3.182 4.7-3.182v.685zm3.186 7.705a.66.66 0 01-.76.074c-1.067-.886-1.257-1.296-1.843-2.142-1.761 1.796-3.009 2.333-5.296 2.333-2.704 0-4.806-1.669-4.806-5.006 0-2.608 1.413-4.383 3.427-5.251 1.746-.772 4.184-.91 6.05-1.121v-.418c0-.769.06-1.676-.392-2.338-.393-.594-1.148-.839-1.813-.839-1.232 0-2.33.632-2.599 1.941-.055.292-.271.58-.567.596l-3.167-.342c-.267-.06-.562-.275-.486-.682C5.765 1.759 8.933.7 11.77.7c1.447 0 3.339.385 4.479 1.481 1.448 1.352 1.309 3.155 1.309 5.115v4.633c0 1.392.578 2.003 1.121 2.754.191.267.233.587-.01.785-.607.508-1.685 1.448-2.277 1.975l-.248-.648z"/>
+          </svg>
+        </div>
+        <div class="entry-info">
+          <div class="name">Amazon</div>
+          <div class="user">j.doe@email.com</div>
+        </div>
+        <svg class="chevron" width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- LinkedIn -->
+      <div class="entry">
+        <div class="entry-icon" style="background:#0A66C2;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </div>
+        <div class="entry-info">
+          <div class="name">LinkedIn</div>
+          <div class="user">j.doe@email.com</div>
+        </div>
+        <svg class="chevron" width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+    </div>
+
+    <button class="add-btn" onclick="getItems()">+ Add new password</button>
+  </div>
+</body>
+</html>

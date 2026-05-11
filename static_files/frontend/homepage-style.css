@@ -1,0 +1,209 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f5f5f3;
+  color: #1a1a1a;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+.container {
+  width: 100%;
+  max-width: 480px;
+}
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.header .greeting { font-size: 13px; color: #888; margin-bottom: 2px; }
+.header .title { font-size: 20px; font-weight: 500; }
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #1d4ed8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 500;
+}
+/* Stats */
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+.stat-card {
+  background: #ebebeb;
+  border-radius: 8px;
+  padding: 0.75rem;
+  text-align: center;
+}
+.stat-card .number { font-size: 22px; font-weight: 500; }
+.stat-card .label  { font-size: 12px; color: #888; margin-top: 2px; }
+.stat-card .number.warn    { color: #b45309; }
+.stat-card .number.success { color: #166534; }
+/* Search */
+.search-wrap {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+.search-wrap input {
+  width: 100%;
+  height: 38px;
+  padding: 0 12px 0 36px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+  color: #1a1a1a;
+  outline: none;
+}
+.search-wrap input:focus { border-color: #aaa; }
+.search-icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #aaa;
+}
+/* Section label */
+.section-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+/* Entry list */
+.entry-list {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.entry {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.entry:last-child { border-bottom: none; }
+.entry:hover { background: #fafafa; }
+.entry-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.entry-info { flex: 1; min-width: 0; }
+.entry-info .name { font-size: 14px; font-weight: 500; }
+.entry-info .user { font-size: 12px; color: #888; margin-top: 1px; }
+.chevron { color: #ccc; }
+/* Delete button */
+.delete-btn {
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.delete-btn:hover { background: #fecaca; }
+/* Add button */
+.add-btn {
+  width: 100%;
+  margin-top: 1rem;
+  height: 40px;
+  border-radius: 8px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.add-btn:hover { background: #bfdbfe; }
+/* Add panel */
+#add-panel {
+  width: 100%;
+  max-width: 480px;
+  margin: 1rem auto 0;
+}
+.panel-inner {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+/* Modal shared styles (used by panel) */
+.modal-title {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.modal-label {
+  font-size: 12px;
+  color: #888;
+  margin-top: 0.5rem;
+}
+.modal-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+  resize: none;
+}
+.modal-input:focus { border-color: #aaa; }
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 1rem;
+}
+.modal-cancel {
+  flex: 1;
+  height: 38px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+.modal-cancel:hover { background: #f5f5f5; }
+.modal-save {
+  flex: 1;
+  height: 38px;
+  border-radius: 8px;
+  border: none;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.modal-save:hover { background: #bfdbfe; }
